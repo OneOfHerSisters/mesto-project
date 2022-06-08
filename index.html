@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <link rel="stylesheet" href="./vendor/Inter/fonts.css" />
+    <title>Mesto</title>
+  </head>
+  <body class="page">
+    <header class="header"><div class="header__logo"></div></header>
+
+    <div class="main">
+      <section class="profile">
+        <img
+          class="profile__picture"
+          src="./images/kusto.jpg"
+          alt="Жак-Ив Кусто"
+        />
+        <div class="profile__info">
+          <div class="profile__name-section">
+            <h1 class="profile__name">Жак-Ив&nbsp;Кусто</h1>
+            <button class="edit-button edit-button_place_profile"></button>
+          </div>
+          <p class="profile__about">Исследователь&nbsp;океана</p>
+        </div>
+        <button class="add-button add-button_place_profile"></button>
+      </section>
+
+      <section class="places">
+        <div class="place">
+          <img
+            class="place__picture"
+            src="./images/karachaevsk.jpg"
+            alt="Карачаевск"
+          />
+          <div class="place__text">
+            <h2 class="place__title">Карачаевск</h2>
+            <button class="like-button"></button>
+          </div>
+        </div>
+        <div class="place">
+          <img class="place__picture" src="./images/elbrus.jpg" alt="Эльбрус" />
+          <div class="place__text">
+            <h2 class="place__title">Гора Эльбрус</h2>
+            <button class="like-button"></button>
+          </div>
+        </div>
+        <div class="place">
+          <img class="place__picture" src="./images/dombay.jpg" alt="Домбай" />
+          <div class="place__text">
+            <h2 class="place__title">Домбай</h2>
+            <button class="like-button"></button>
+          </div>
+        </div>
+        <div class="place">
+          <img class="place__picture" src="./images/elbrus.jpg" alt="Эльбрус" />
+          <div class="place__text">
+            <h2 class="place__title">Гора Эльбрус</h2>
+            <button class="like-button"></button>
+          </div>
+        </div>
+        <div class="place">
+          <img class="place__picture" src="./images/dombay.jpg" alt="Домбай" />
+          <div class="place__text">
+            <h2 class="place__title">Домбай</h2>
+            <button class="like-button"></button>
+          </div>
+        </div>
+        <div class="place">
+          <img
+            class="place__picture"
+            src="./images/karachaevsk.jpg"
+            alt="Карачаевск"
+          />
+          <div class="place__text">
+            <h2 class="place__title">Карачаево-Черкессия</h2>
+            <button class="like-button"></button>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer class="footer"></footer>
+    <div class="popup popup_opened">
+      <form class="form">
+        <h2 class="form__item form__header">Редактировать профиль</h2>
+        <fieldset class="form__profile-info">
+          <input
+            class="form__item form__input"
+            type="text"
+            value="Жак-Ив Кусто"
+            placeholder="Имя"
+          />
+          <input
+            class="form__item form__input"
+            type="text"
+            value="Исследователь океана"
+            placeholder="Звание"
+          />
+          <button class="form__item form__button" type="submit">
+            Сохранить
+          </button>
+          <button class="form__close-button"></button>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

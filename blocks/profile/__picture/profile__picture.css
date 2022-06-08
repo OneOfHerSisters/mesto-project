@@ -1,0 +1,11 @@
+.profile__picture {
+  border-radius: 100%;
+  max-height: 120px;
+  margin: 0 calc(100% * 30 / 880) 0 0;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__picture {
+    margin: 0 0 26px;
+  }
+}

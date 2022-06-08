@@ -1,0 +1,7 @@
+.place {
+  border: 1px solid black;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #000;
+  overflow: hidden;
+}
