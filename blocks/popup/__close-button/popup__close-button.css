@@ -1,5 +1,5 @@
-.form__close-button {
-  background-image: url(../../../images/close-icon.png);
+.popup__close-button {
+  background-image: url(../../../images/close-icon.svg);
   background-size: 100%;
   width: 32px;
   height: 32px;
@@ -14,7 +14,7 @@
 }
 
 @media screen and (max-width: 520px) {
-  .form__close-button {
+  .popup__close-button {
     width: 20px;
     height: 20px;
     top: -36px;
@@ -22,6 +22,7 @@
   }
 }
 
-.form__close-button:hover {
+.popup__close-button:hover {
   opacity: 0.6;
+  cursor: pointer;
 }

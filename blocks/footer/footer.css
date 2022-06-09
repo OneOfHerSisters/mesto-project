@@ -1,16 +1,10 @@
 .footer {
-  background-image: url(../../images/footer.png);
-  width: 318px;
-  height: 18px;
-  background-repeat: no-repeat;
-  background-size: contain;
   margin-bottom: 60px;
 }
 
 @media screen and (max-width: 320px) {
   .footer {
-    width: 282px;
-    height: 14px;
+    max-width: 282px;
     margin: 0 auto 36px;
   }
 }

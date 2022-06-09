@@ -4,11 +4,12 @@
   width: 142px;
   height: 33px;
   background-size: 100%;
+  margin: 41px 0 45px;
 }
 
 @media screen and (max-width: 320px) {
   .header__logo {
-    margin: auto auto auto 27px;
+    margin: 28px auto 31px 27px;
     width: 103px;
     height: 24px;
   }
