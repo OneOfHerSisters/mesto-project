@@ -37,34 +37,36 @@
             <button type="button" class="place__delete-button"></button>
           </div>
         </template>
-        <div class="popup popup_photo">
-          <div class="popup__container_photo">
-            <img class="popup__place-picture" src="#" alt="#" />
-            <h2 class="popup__place-title">#</h2>
-            <button type="button" class="popup__close-button"></button>
-          </div>
-        </div>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup popup_profile">
+    <div class="popup popup_content_photo">
+      <div class="popup__photo-area">
+        <img class="popup__place-picture" src="#" alt="#" />
+        <h2 class="popup__place-title">#</h2>
+        <button type="button" class="popup__close-button"></button>
+      </div>
+    </div>
+    <div class="popup popup_content_profile">
       <div class="popup__container">
         <h2 class="popup__header">Редактировать профиль</h2>
-        <form class="form">
+        <form class="form" name="profile-form">
           <fieldset class="form__info">
             <input
-              class="form__input form__input_name"
+              class="form__input form__input_content_name"
               type="text"
               value=""
               placeholder="Имя"
+              name="name"
             />
             <input
-              class="form__input form__input_about"
+              class="form__input form__input_content_about"
               type="text"
               value=""
-              placeholder="Звание"
+              placeholder="Профессия"
+              name="job"
             />
             <button class="form__button" type="submit">Сохранить</button>
           </fieldset>
@@ -72,22 +74,24 @@
         <button type="button" class="popup__close-button"></button>
       </div>
     </div>
-    <div class="popup popup_place">
+    <div class="popup popup_content_place">
       <div class="popup__container">
         <h2 class="popup__header">Новое место</h2>
-        <form class="form">
+        <form class="form" name="place-from">
           <fieldset class="form__info">
             <input
-              class="form__input form__input_name"
+              class="form__input form__input_content_name"
               type="text"
               value=""
               placeholder="Название"
+              name="title"
             />
             <input
-              class="form__input form__input_about"
+              class="form__input form__input_content_about"
               type="text"
               value=""
               placeholder="Ссылка на картинку"
+              name="src"
             />
             <button class="form__button" type="submit">Создать</button>
           </fieldset>
@@ -95,6 +99,7 @@
         <button type="button" class="popup__close-button"></button>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="./scripts/cards.js"></script>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
