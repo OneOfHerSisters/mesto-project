@@ -1,0 +1,17 @@
+.form__field {
+  min-height: 58px;
+}
+
+.form__field:last-of-type {
+  min-height: 76px;
+}
+
+@media screen and (max-width: 520px) {
+  .form__field:last-of-type {
+    min-height: 73px;
+  }
+  .form__field {
+    width: 238px;
+    min-height: 58px;
+  }
+}

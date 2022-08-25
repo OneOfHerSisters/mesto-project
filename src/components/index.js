@@ -17,6 +17,10 @@ const placeTemplate = document.querySelector('#place').content;
 const placesArea = document.querySelector('.places');
 
 
+import '../styles/index.css';
+import {initialCards} from './cards.js';
+import {enableValidation} from './validate.js';
+
 function createPlace(name, link) {
     const place = placeTemplate.querySelector('.place').cloneNode(true);
     const placePicture = place.querySelector('.place__picture')
@@ -96,3 +100,14 @@ function submitPlaceForm (evt) {
 formProfile.addEventListener('submit', submitProfileForm);
 formPlace.addEventListener('submit', submitPlaceForm);
 
+// включение валидации вызовом enableValidation
+// все настройки передаются при вызове
+
+enableValidation();
+
+document.addEventListener("keydown", function(evt) {
+    if (evt.keyCode == 27) {
+        if (popupPlace.classList.contains('popup_opened') || popupProfile.classList.contains('popup_opened')) {
+            closePopup(document.querySelector('.popup_opened'));
+    }
+}});
