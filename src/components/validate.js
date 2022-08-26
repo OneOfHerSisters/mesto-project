@@ -12,8 +12,8 @@ const hideInputError = (formElement, inputElement) => {
     errorElement.textContent = '';
   };
 
-export function enableValidation(){
-    const formList = Array.from(document.querySelectorAll('.form'))
+export function enableValidation(validationSettings){
+    const formList = Array.from(document.querySelectorAll(validationSettings.formSelector))
     formList.forEach((formElement) => {
       formElement.addEventListener('submit', function(evt) {
         evt.preventDefault();
@@ -34,9 +34,7 @@ function setEventListeners(formElement) {
   };
 
 function checkInputValidity (formElement, inputElement) {
-    if (inputElement.validity.valueMissing) {
-        inputElement.setCustomValidity(inputElement.dataset.errorMessageValueMissing);
-    } else if (inputElement.validity.patternMismatch) {
+    if (inputElement.validity.patternMismatch) {
         inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
         inputElement.setCustomValidity("");

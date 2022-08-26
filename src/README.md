@@ -9,6 +9,7 @@
 3. Медиазапросы
 4. Методология БЭМ.
 5. JavaScript
+6. Webpack
 
 ### [Ссылка на GitHub проекта](https://github.com/OneOfHerSisters/mesto-project)
 
