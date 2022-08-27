@@ -1,10 +1,8 @@
-const popupPlace = document.querySelector('.popup_content_place');
-export const popupPhoto = document.querySelector('.popup_content_photo');
+export const popupPlace = document.querySelector('.popup_content_place');
+const popupPhoto = document.querySelector('.popup_content_photo');
 const formPlace = popupPlace.querySelector('.form')
 export const popupProfile = document.querySelector('.popup_content_profile');
 const formProfile = popupProfile.querySelector('.form')
-const buttonCloseProfile = popupProfile.querySelector('.popup__close-button');
-const buttonClosePlace = popupPlace.querySelector('.popup__close-button');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const buttonAdd = document.querySelector('.profile__add-button');
 export const profileName = document.querySelector('.profile__name');
@@ -14,13 +12,22 @@ export const jobInput = formProfile.querySelector('.form__input_content_about');
 const namePlaceInput = formPlace.querySelector('.form__input_content_name');
 const imageInput = formPlace.querySelector('.form__input_content_about');
 const placesArea = document.querySelector('.places');
-
+const popups = document.querySelectorAll('.popup')
+const settings = {
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__button',
+    inactiveButtonClass: 'form__button_inactive',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__input-error_active'
+  }
 
 import '../styles/index.css';
 import {initialCards, createPlace} from './cards.js';
 import {enableValidation} from './validate.js';
-import {handleOverlayClick, handleEscKeydown} from './modal.js';
 import {closePopup, openPopup} from './utils.js';
+import {handleOpenProfilePopup} from './modal.js'
+import {validatePlacePopup} from './validate.js'
 
 function submitProfileForm (evt) {
     evt.preventDefault();
@@ -31,48 +38,38 @@ function submitProfileForm (evt) {
 
 function submitPlaceForm (evt) {
     evt.preventDefault();
-    placesArea.prepend(createPlace(namePlaceInput.value, imageInput.value)); 
+    placesArea.prepend(createPlace(namePlaceInput.value, imageInput.value, settings)); 
     formPlace.reset();
     closePopup(popupPlace);
 }
 
 formProfile.addEventListener('submit', submitProfileForm);
 formPlace.addEventListener('submit', submitPlaceForm);
-popupPlace.addEventListener("click", handleOverlayClick);
-popupProfile.addEventListener("click", handleOverlayClick);
 
-document.addEventListener("keydown", function(evt) {
-    if (evt.keyCode == 27) {
-        handleEscKeydown(evt)
-    }
-});
-
-initialCards.forEach(function(elem) {
-    placesArea.append(createPlace(elem.name, elem.link)); 
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopup(popup)
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+          closePopup(popup)
+        }
+    })
 })
 
-buttonCloseProfile.addEventListener('click', () => {
-    closePopup(popupProfile)
-});
-
-buttonClosePlace.addEventListener('click', () => {
-    closePopup(popupPlace)
-});
+initialCards.forEach(function(elem) {
+    placesArea.append(createPlace(elem.name, elem.link, settings)); 
+})
 
 buttonEdit.addEventListener('click', () => {
-    openPopup(popupProfile)
+    openPopup(popupProfile);
+    handleOpenProfilePopup();
 });
 
 buttonAdd.addEventListener('click', () => {
-    openPopup(popupPlace)
-});
+    openPopup(popupPlace, settings);
+    validatePlacePopup(settings);
+})
 
-enableValidation({
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__button',
-    inactiveButtonClass: 'form__button_disabled',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__error_visible'
-  }); 
+enableValidation(settings); 
 

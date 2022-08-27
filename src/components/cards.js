@@ -1,5 +1,9 @@
-import {popupPhoto} from './index.js'
 import {closePopup, openPopup} from './utils.js';
+const popupPhoto = document.querySelector('.popup_content_photo');
+const buttonClosePlacePopup = popupPhoto.querySelector('.popup__close-button');
+const placeTemplate = document.querySelector('#place').content; 
+const popupPlacePicture = popupPhoto.querySelector('.popup__place-picture');
+const popupPlaceTitle = popupPhoto.querySelector('.popup__place-title');
 
 export const initialCards = [
     {
@@ -28,32 +32,33 @@ export const initialCards = [
     }
   ];
 
-  export function createPlace(name, link) {
-    const placeTemplate = document.querySelector('#place').content; 
+buttonClosePlacePopup.addEventListener('click', () => {
+  closePopup(popupPhoto);
+})
+
+export function createPlace(name, link, validationSettings) {
     const place = placeTemplate.querySelector('.place').cloneNode(true);
     const placePicture = place.querySelector('.place__picture');
     placePicture.src = link;
     placePicture.alt = name;
     place.querySelector('.place__title').textContent = name;
+    
     const likeButton = place.querySelector('.place__like-button');
     likeButton.addEventListener('click', () => {
         likeButton.classList.toggle('place__like-button_active');
     });
+
     const deleteButton = place.querySelector('.place__delete-button');
     deleteButton.addEventListener('click', () => {
         place.remove();
     });
-    placePicture.addEventListener('click', () => {
-      const placePicture = popupPhoto.querySelector('.popup__place-picture');
-      placePicture.src = link;
-      placePicture.alt = name;
-      popupPhoto.querySelector('.popup__place-title').textContent = name;
-      openPopup(popupPhoto);
-        const buttonClosePlacePopup = popupPhoto.querySelector('.popup__close-button');
-        buttonClosePlacePopup.addEventListener('click', () => {
-            closePopup(popupPhoto);
-        })
-     })
-     return(place);
 
+    placePicture.addEventListener('click', () => {
+      popupPlacePicture.src = link;
+      popupPlacePicture.alt = name; 
+      popupPlaceTitle.textContent = name;
+      openPopup(popupPhoto, validationSettings);
+     })
+
+     return(place);
 }

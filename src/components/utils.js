@@ -1,15 +1,11 @@
-import {popupProfile} from './index.js'
-import {profileName, profileAbout, nameInput, jobInput} from './index.js';
-
-export function closePopup(popup) {
-    popup.classList.remove('popup_opened');
-}
+import {closeActivePopup} from './modal.js'
 
 export function openPopup(popup) {
-    popup.classList.add('popup_opened');
-
-    if (popup === popupProfile) {
-      nameInput.value = profileName.textContent;
-      jobInput.value = profileAbout.textContent;
-    }
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closeActivePopup); 
 }
+
+export function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeActivePopup); 
+} 
