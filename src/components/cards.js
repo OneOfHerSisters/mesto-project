@@ -57,7 +57,7 @@ export function createPlace(name, link, validationSettings) {
       popupPlacePicture.src = link;
       popupPlacePicture.alt = name; 
       popupPlaceTitle.textContent = name;
-      openPopup(popupPhoto, validationSettings);
+      openPopup(popupPhoto);
      })
 
      return(place);

@@ -27,7 +27,8 @@ import {initialCards, createPlace} from './cards.js';
 import {enableValidation} from './validate.js';
 import {closePopup, openPopup} from './utils.js';
 import {handleOpenProfilePopup} from './modal.js'
-import {validatePlacePopup} from './validate.js'
+import {toggleButton} from './validate.js'
+
 
 function submitProfileForm (evt) {
     evt.preventDefault();
@@ -67,8 +68,8 @@ buttonEdit.addEventListener('click', () => {
 });
 
 buttonAdd.addEventListener('click', () => {
-    openPopup(popupPlace, settings);
-    validatePlacePopup(settings);
+    openPopup(popupPlace);
+    toggleButton(popupPlace, settings);
 })
 
 enableValidation(settings); 

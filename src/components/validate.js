@@ -71,8 +71,8 @@ export function toggleButtonState(inputList, buttonElement, validationSettings) 
     }
   }
 
-export function validatePlacePopup(validationSettings) {
-    const inputList = Array.from(popupPlace.querySelectorAll(validationSettings.inputSelector));
-    const buttonElement = popupPlace.querySelector(validationSettings.submitButtonSelector);
+export function toggleButton(popup, validationSettings) {
+    const inputList = Array.from(popup.querySelectorAll(validationSettings.inputSelector));
+    const buttonElement = popup.querySelector(validationSettings.submitButtonSelector);
     toggleButtonState(inputList, buttonElement, validationSettings)
 }
