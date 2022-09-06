@@ -1,0 +1,14 @@
+.profile__picture-wrapper {
+  border-radius: 100%;
+  overflow: hidden;
+  height: 120px;
+  width: 120px;
+  margin: 0 calc(100% * 30 / 880) 0 0;
+  position: relative;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__picture-wrapper {
+    margin: 0 0 26px;
+  }
+}
