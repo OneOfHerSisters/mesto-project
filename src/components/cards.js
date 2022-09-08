@@ -1,19 +1,7 @@
-import {closePopup, openPopup} from './utils.js';
-import {settings, myId} from './index.js'
-import {deleteLike, addLike, deletePlace, getCards} from './api.js';
+import {openPopup, popupPhoto, placeTemplate, popupPlacePicture, popupPlaceTitle, placesArea} from './utils.js';
+import {myId} from './index.js'
 
-const popupPhoto = document.querySelector('.popup_content_photo');
-const buttonClosePlacePopup = popupPhoto.querySelector('.popup__close-button');
-const placeTemplate = document.querySelector('#place').content; 
-const popupPlacePicture = popupPhoto.querySelector('.popup__place-picture');
-const popupPlaceTitle = popupPhoto.querySelector('.popup__place-title');
-const placesArea = document.querySelector('.places');
-
-buttonClosePlacePopup.addEventListener('click', () => {
-  closePopup(popupPhoto);
-})
-
-export function createPlace(name, link, likes, ownerId, elemId, validationSettings) {
+export function createPlace(name, link, likes, ownerId, elemId, handleDeleteLike, handleAddLike, handleDeleteCard) {
     const place = placeTemplate.querySelector('.place').cloneNode(true);
     const placePicture = place.querySelector('.place__picture');
     const likesNumber = place.querySelector('.place__likes');
@@ -24,7 +12,7 @@ export function createPlace(name, link, likes, ownerId, elemId, validationSettin
   
     const likeButton = place.querySelector('.place__like-button');
     if (likes) {
-      let isMyLike = likes.some(like => {
+      const isMyLike = likes.some(like => {
         return like._id == myId
       })
       if (isMyLike) {
@@ -34,9 +22,11 @@ export function createPlace(name, link, likes, ownerId, elemId, validationSettin
 
     likeButton.addEventListener('click', () => {
         if (likeButton.classList.contains('place__like-button_active')) {
-          deleteLike(elemId).then((res) => {likesNumber.textContent = res.likes.length}).then(likeButton.classList.remove('place__like-button_active'));
+          handleDeleteLike(elemId, likesNumber)
+          likeButton.classList.remove('place__like-button_active');
         } else {
-          addLike(elemId).then((res) => {likesNumber.textContent = res.likes.length}).then(likeButton.classList.add('place__like-button_active'))
+          handleAddLike(elemId, likesNumber)
+          likeButton.classList.add('place__like-button_active');
         }
     });
 
@@ -46,8 +36,7 @@ export function createPlace(name, link, likes, ownerId, elemId, validationSettin
       deleteButton.classList.add('place__delete-button_disabled')
     } else {
       deleteButton.addEventListener('click', () => {
-        deletePlace(elemId)
-        place.remove();
+        handleDeleteCard(elemId, place)
     });
     }
     placePicture.addEventListener('click', () => {
@@ -59,9 +48,3 @@ export function createPlace(name, link, likes, ownerId, elemId, validationSettin
 
      return(place);
 }
-
-getCards().then((res) => {
-  res.forEach(function(elem) {
-  placesArea.append(createPlace(elem.name, elem.link, elem.likes, elem.owner._id, elem._id, settings)); 
-  })
-});

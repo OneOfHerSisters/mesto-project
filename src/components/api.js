@@ -5,18 +5,15 @@ const config = {
       'Content-Type': 'application/json',
     }
   }
+
+import { getResponse } from "./utils";
   
 export function deletePlace(cardId) {
     return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
   })
-    .then(res => {
-        if (res.ok) {
-        return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(getResponse)
     .catch((err) =>{
         console.log(err);
       })  
@@ -27,12 +24,7 @@ export function addLike(cardId) {
       method: 'PUT',
       headers: config.headers,
   })
-    .then(res => {
-        if (res.ok) {
-        return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-    })
+    .then(res => getResponse(res))
     .catch((err) =>{
           console.log(err);
       })  
@@ -43,12 +35,7 @@ export function deleteLike(cardId) {
       method: 'DELETE',
       headers: config.headers,
   })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(res => getResponse(res))
         .catch((err) =>{
             console.log(err);
         })  
@@ -58,12 +45,7 @@ export function getCards() {
     return fetch(`${config.baseUrl}/cards`, {
         headers: config.headers,
       })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(res => getResponse(res))
         .catch((err) =>{
             console.log(err);
         })  
@@ -79,12 +61,7 @@ export function submitProfileForm(nameInput, jobInput) {
         about: jobInput.value
   })
 })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(res => getResponse(res))
         .catch((err) =>{
             console.log(err);
         })  
@@ -100,12 +77,7 @@ export function submitPlaceForm(namePlaceInput, imageInput) {
         link: `${imageInput.value}`
   })
 })
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(res => getResponse(res))
         .catch((err) =>{
             console.log(err);
         })  
@@ -118,12 +90,7 @@ export function changeAvatar(avatarInput) {
         body: JSON.stringify({
             avatar: `${avatarInput.value}`,
     })})
-        .then(res => {
-            if (res.ok) {
-                return res.json();
-            }
-            return Promise.reject(`Ошибка: ${res.status}`);
-        })
+        .then(res => getResponse(res))
         .catch((err) =>{
             console.log(err);
         })  
@@ -133,13 +100,21 @@ export function renderProfile() {
     return fetch(`${config.baseUrl}/users/me`, {
         headers: config.headers,
         })
-            .then(res => {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.status}`);
-            })
+            .then(res => getResponse(res))
             .catch((err) =>{
                 console.log(err);
             })  
     }
+
+export function handleDeleteLike(elemId, likesNumber) {
+    deleteLike(elemId).then((res) => {likesNumber.textContent = res.likes.length}).catch((err) =>{console.log(err);});
+}
+
+export function handleAddLike(elemId, likesNumber) {
+    addLike(elemId).then((res) => {likesNumber.textContent = res.likes.length}).catch((err) =>{console.log(err);});
+}
+
+
+export function handleDeleteCard(elemId, place) {
+    deletePlace(elemId).then(place.remove()).catch((err) =>{console.log(err);});
+}

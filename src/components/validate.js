@@ -1,5 +1,3 @@
-import {popupPlace} from './index.js'
-
 const showInputError = (formElement, inputElement, errorMessage, validationSettings) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(validationSettings.inputErrorClass);
@@ -62,7 +60,7 @@ export function hasEmptyInput(inputList) {
 }
 
 export function toggleButtonState(inputList, buttonElement, validationSettings) {
-    if (hasInvalidInput(inputList) || hasEmptyInput(inputList)) {
+    if (hasInvalidInput(inputList) || hasEmptyInput(inputList)) { 
       buttonElement.classList.add(validationSettings.inactiveButtonClass);
       buttonElement.setAttribute('disabled', 'disabled');
     } else {

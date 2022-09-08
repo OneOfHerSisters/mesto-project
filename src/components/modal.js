@@ -1,5 +1,4 @@
 import {closePopup} from './utils.js';
-import {profileName, profileAbout, nameInput, jobInput} from './index.js';
 
 export function closeActivePopup(evt) {
     if (evt.key === 'Escape') {
@@ -8,9 +7,4 @@ export function closeActivePopup(evt) {
         closePopup(popupOpened); 
         } 
     } 
-}
-
-export function handleOpenProfilePopup() {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileAbout.textContent;
 }
