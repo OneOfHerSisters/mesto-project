@@ -1,42 +1,24 @@
-export const popupPlace = document.querySelector('.popup_content_place');
-const popupAvatar = document.querySelector('.popup_content_avatar');
-const formAvatar = popupAvatar.querySelector('.form')
-const formPlace = popupPlace.querySelector('.form')
-export const popupProfile = document.querySelector('.popup_content_profile');
-const formProfile = popupProfile.querySelector('.form')
-const buttonEdit = document.querySelector('.profile__edit-button');
-const buttonAdd = document.querySelector('.profile__add-button');
-export const profileName = document.querySelector('.profile__name');
-export const profileAbout = document.querySelector('.profile__about');
-const profilePicture = document.querySelector('.profile__picture')
-export const nameInput = formProfile.querySelector('.form__input_content_name');
-export const jobInput = formProfile.querySelector('.form__input_content_about');
-const namePlaceInput = formPlace.querySelector('.form__input_content_name');
-const imageInput = formPlace.querySelector('.form__input_content_about');
-const placesArea = document.querySelector('.places');
-const popups = document.querySelectorAll('.popup')
-const profileSubmitButton = formProfile.querySelector('.form__button')
-const placeSubmitButton = formPlace.querySelector('.form__button')
-const avatarSubmitButton = formAvatar.querySelector('.form__button')
-const avatarInput = document.querySelector('.form__input_content_avatar')
-export var myId;
-export const settings = {
-    formSelector: '.form',
-    inputSelector: '.form__input',
-    submitButtonSelector: '.form__button',
-    inactiveButtonClass: 'form__button_inactive',
-    inputErrorClass: 'form__input_type_error',
-    errorClass: 'form__input-error_active'
-  }
-
-  
 import '../styles/index.css';
-import {createPlace} from './cards.js';
+import {createPlace, changeLikeStatus} from './cards.js';
 import {enableValidation} from './validate.js';
-import {closePopup, openPopup, buttonClosePlacePopup, popupPhoto, renderLoading} from './utils.js';
+import {popupPhoto, renderLoading, popupAvatar, formAvatar, avatarSubmitButton, buttonEdit,buttonAdd, profilePicture, placesArea, popups, avatarInput, popupProfile, formProfile, profileSubmitButton, buttonClosePlacePopup, formPlace, placeSubmitButton, namePlaceInput, imageInput, profileName, profileAbout, nameInput, jobInput, popupPlace, settings} from './utils.js';
 import {toggleButton} from './validate.js'
-import {renderProfile, submitPlaceForm, submitProfileForm, changeAvatar, getCards} from './api.js'
-import { handleDeleteLike, handleAddLike, handleDeleteCard} from './api.js';
+import {renderProfile, submitPlaceForm, submitProfileForm, changeAvatar, getCards, deleteLike, addLike, deletePlace} from './api.js'
+import {closePopup, openPopup} from './modal.js';
+
+export let myId;
+
+function handleDeleteLike(elemId, likesNumber, likeButton) {
+    deleteLike(elemId).then((res) => {changeLikeStatus(res,likesNumber, likeButton, true)}).catch((err) =>{console.log(err);});
+}
+
+function handleAddLike(elemId, likesNumber, likeButton) {
+    addLike(elemId).then((res) => {changeLikeStatus(res, likesNumber, likeButton, false)}).catch((err) =>{console.log(err);});
+}
+
+function handleDeleteCard(elemId, place) {
+    deletePlace(elemId).then(place.remove()).catch((err) =>{console.log(err);});
+}
   
 formProfile.addEventListener('submit', (evt) => {
     renderLoading(profileSubmitButton, 'Сохранить', true)
@@ -87,7 +69,6 @@ formAvatar.addEventListener('submit', (evt) => {
     .finally(() => renderLoading(avatarSubmitButton, 'Сохранить', false))
         
     })
-
 
 
 popups.forEach((popup) => {

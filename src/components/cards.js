@@ -1,4 +1,5 @@
-import {openPopup, popupPhoto, placeTemplate, popupPlacePicture, popupPlaceTitle, placesArea} from './utils.js';
+import {popupPhoto, placeTemplate, popupPlacePicture, popupPlaceTitle} from './utils.js';
+import {openPopup} from './modal.js';
 import {myId} from './index.js'
 
 export function createPlace(name, link, likes, ownerId, elemId, handleDeleteLike, handleAddLike, handleDeleteCard) {
@@ -22,11 +23,10 @@ export function createPlace(name, link, likes, ownerId, elemId, handleDeleteLike
 
     likeButton.addEventListener('click', () => {
         if (likeButton.classList.contains('place__like-button_active')) {
-          handleDeleteLike(elemId, likesNumber)
-          likeButton.classList.remove('place__like-button_active');
+          handleDeleteLike(elemId, likesNumber, likeButton)
+          
         } else {
-          handleAddLike(elemId, likesNumber)
-          likeButton.classList.add('place__like-button_active');
+          handleAddLike(elemId, likesNumber, likeButton)
         }
     });
 
@@ -47,4 +47,13 @@ export function createPlace(name, link, likes, ownerId, elemId, handleDeleteLike
      })
 
      return(place);
+}
+
+export function changeLikeStatus(res, likesNumber, likeButton, remove) {
+  likesNumber.textContent = res.likes.length
+  if (remove) {
+    likeButton.classList.remove('place__like-button_active');
+  } else {
+    likeButton.classList.add('place__like-button_active');
+  }
 }

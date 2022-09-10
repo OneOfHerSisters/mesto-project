@@ -105,16 +105,3 @@ export function renderProfile() {
                 console.log(err);
             })  
     }
-
-export function handleDeleteLike(elemId, likesNumber) {
-    deleteLike(elemId).then((res) => {likesNumber.textContent = res.likes.length}).catch((err) =>{console.log(err);});
-}
-
-export function handleAddLike(elemId, likesNumber) {
-    addLike(elemId).then((res) => {likesNumber.textContent = res.likes.length}).catch((err) =>{console.log(err);});
-}
-
-
-export function handleDeleteCard(elemId, place) {
-    deletePlace(elemId).then(place.remove()).catch((err) =>{console.log(err);});
-}
