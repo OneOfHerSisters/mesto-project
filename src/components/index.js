@@ -9,15 +9,23 @@ import {closePopup, openPopup} from './modal.js';
 export let myId;
 
 function handleDeleteLike(elemId, likesNumber, likeButton) {
-    deleteLike(elemId).then((res) => {changeLikeStatus(res,likesNumber, likeButton, true)}).catch((err) =>{console.log(err);});
+    deleteLike(elemId)
+        .then((res) => {changeLikeStatus(res,likesNumber, likeButton, true)})
+        .catch((err) =>{console.log(err);});
 }
 
 function handleAddLike(elemId, likesNumber, likeButton) {
-    addLike(elemId).then((res) => {changeLikeStatus(res, likesNumber, likeButton, false)}).catch((err) =>{console.log(err);});
+    addLike(elemId)
+        .then((res) => {changeLikeStatus(res, likesNumber, likeButton, false)})
+        .catch((err) =>{console.log(err);});
 }
 
 function handleDeleteCard(elemId, place) {
-    deletePlace(elemId).then(place.remove()).catch((err) =>{console.log(err);});
+    deletePlace(elemId)
+        .then(() => place.remove())
+        .catch((err) =>{
+            console.log(err)
+        });
 }
   
 formProfile.addEventListener('submit', (evt) => {
